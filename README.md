@@ -35,21 +35,21 @@ Python 2.7
 
 ##Généralités sur le programme
 
-Les consignes en position du drône suiveur (correspondant aux coordonnées actuelles du drône maître seront envoyées sur le réseau ROS toutes les 100ms (10Hz).
-Un arrêt du programme (Ctrl+C, appui sur espace) provoquera un atterrissage du drône suiveur
+- Les consignes en position du drône suiveur (correspondant aux coordonnées actuelles du drône maître seront envoyées sur le réseau ROS toutes les 100ms (10Hz).
+- Un arrêt du programme (Ctrl+C, appui sur espace) provoquera un atterrissage du drône suiveur
 
 
 ##Liste des fonctions vitales du système
 
-take_off - Décoller 
-land - Atterrir
-set_position - Donner une consigne de position à un drône
-stop_program - arrêt du programme
-fix_altitude - corriger l’altitude du drône suiveur
-fix_distance - corriger la distance entre les deux drônes
-fix_orientation - corriger l‘orientation du drône suiveur
-get_ros_flightinfo - Récupérer les données de vol sur le réseau ROS
-publish_ros_cmd - Publier les commandes sur le réseau ROS
+- `take_off` - Décoller 
+- `land` - Atterrir
+- `set_position` - Donner une consigne de position à un drône
+- `stop_program` - arrêt du programme
+- `fix_altitude` - corriger l’altitude du drône suiveur
+- `fix_distance` - corriger la distance entre les deux drônes
+- `fix_orientation` - corriger l‘orientation du drône suiveur
+- `get_ros_flightinfo` - Récupérer les données de vol sur le réseau ROS
+- `publish_ros_cmd` - Publier les commandes sur le réseau ROS
 
 ##Architecture
 à venir ...
