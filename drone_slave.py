@@ -11,7 +11,7 @@ class Drone_slave(Drone):
 
 
 	#Define function to set which drone is the master
-	def set_master():
+	def set_master(drone):
 
 
 
