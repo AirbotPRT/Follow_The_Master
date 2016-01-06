@@ -1,3 +1,5 @@
+import drone
+
 class Drone_slave(Drone):
 
 
