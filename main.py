@@ -14,15 +14,15 @@ def slave_control():
 	check_safety_issues()
 	
 	# If The slave attitude (Margin included) different Master altitude (Margin Included) => fix_altitude()
-	if (slave_d.altitude - MarginAlt or slave_d.altitude + MarginAlt) != master_d.altitude:
+	if (slave_d.altitude - marginAlt or slave_d.altitude + marginAlt) != master_d.altitude:
 		slave_d.fix_altitude()
 
 	# If The slave distance (Margin included) different Master distance => fix_distance()
-	if (slave_d.distance - MarginDist or slave_d.distance + MarginDist) != master_d.distance:
+	if (slave_d.distance - marginDist or slave_d.distance + marginDist) != master_d.distance:
 		slave_d.fix_distance()
 
 	# If The slave orientation (Margin included) different Master orientation => fix_orientation()
-	if (slave_d.orientation - MarginOrien or slave_d.orientation + MarginOrien) != master_d.orientation:
+	if (slave_d.orientation - marginOrien or slave_d.orientation + marginOrien) != master_d.orientation:
 		slave_d.fix_orientation()	
 
 #Main function of the application

@@ -1,1 +1,3 @@
-global marginAlt =1
+marginAlt =1
+marginOrien =1
+marginDist=1
