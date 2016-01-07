@@ -10,11 +10,20 @@ def init():
 
 #Slave follow the master
 def slave_control():
-	ros.get_fligh_info([master_d,slave_d])
+	ros.get_flight_info([master_d,slave_d])
 	check_safety_issues()
-	slave_d.fix_altitude()
-	# If TODO 
-		
+	
+	# If The slave attitude (Margin included) different Master altitude (Margin Included) => fix_altitude()
+	if (slave_d.altitude - MarginAlt or slave_d.altitude + MarginAlt) != master_d.altitude:
+		slave_d.fix_altitude()
+
+	# If The slave distance (Margin included) different Master distance => fix_distance()
+	if (slave_d.distance - MarginDist or slave_d.distance + MarginDist) != master_d.distance:
+		slave_d.fix_distance()
+
+	# If The slave orientation (Margin included) different Master orientation => fix_orientation()
+	if (slave_d.orientation - MarginOrien or slave_d.orientation + MarginOrien) != master_d.orientation:
+		slave_d.fix_orientation()	
 
 #Main function of the application
 def main():
@@ -25,4 +34,9 @@ def main():
 		slave_control()
 		wait(200)
 
+def exit():
+	slave_d.land()
+
 main().mainloop()
+exit()
+

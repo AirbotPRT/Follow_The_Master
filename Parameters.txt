@@ -1,0 +1,3 @@
+MarginAlt = 1
+MarginDist = 1
+MarginOrien = 1
