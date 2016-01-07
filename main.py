@@ -13,16 +13,16 @@ def slave_control():
 	ros.get_flight_info([master_d,slave_d])
 	check_safety_issues()
 	
-	# If The slave attitude (Margin included) different Master altitude (Margin Included) => fix_altitude()
-	if (slave_d.altitude - marginAlt or slave_d.altitude + marginAlt) != master_d.altitude:
+	#
+	if (master_d.altitude - marginAlt > slave_d.altitude) or (slave_d.altitude > master_d.altitude + marginAlt):
 		slave_d.fix_altitude()
 
-	# If The slave distance (Margin included) different Master distance => fix_distance()
-	if (slave_d.distance - marginDist or slave_d.distance + marginDist) != master_d.distance:
+	#
+	if (master_d.distance - marginDist > slave_d.distance ) or (slave_d.distance  > master_d.distance  + marginDist):
 		slave_d.fix_distance()
 
-	# If The slave orientation (Margin included) different Master orientation => fix_orientation()
-	if (slave_d.orientation - marginOrien or slave_d.orientation + marginOrien) != master_d.orientation:
+	# 
+	if (master_d.orientation - marginOrien > slave_d.orientation ) or (slave_d.orientation  > master_d.orientation  + marginOrien):
 		slave_d.fix_orientation()	
 
 #Main function of the application

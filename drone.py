@@ -1,7 +1,7 @@
 import abstract.ros
 
 #Declare the data received from GPS on ROS network
-class Drone(Object):
+class Drone():
 	def __init__(adresse):
 
 		#Not sure => To modify
