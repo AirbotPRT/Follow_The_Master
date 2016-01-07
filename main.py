@@ -1,6 +1,5 @@
-import drone_slave
-import drone
-import abstract.ros
+from drone_classes import drone, drone_slave
+import abstractros
 
 
 #initialize the variables
@@ -10,7 +9,7 @@ def init():
 
 #Slave follow the master
 def slave_control():
-	ros.get_flight_info([master_d,slave_d])
+	abstractros.refresh_flight_info([master_d,slave_d])  # Don't like that
 	check_safety_issues()
 	
 	#
@@ -22,6 +21,7 @@ def slave_control():
 		slave_d.fix_distance()
 
 	# 
+
 	if (master_d.orientation - marginOrien > slave_d.orientation ) or (slave_d.orientation  > master_d.orientation  + marginOrien):
 		slave_d.fix_orientation()	
 
