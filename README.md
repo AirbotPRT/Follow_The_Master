@@ -27,6 +27,7 @@ Lors de l’arrêt de notre application, le drône “Suiveur” atterrira.
 		Les commandes de décollage, de contrôle en position et d’atterrissage pour chaque drône pourront être directement publiées sur le réseau ROS.
 - Les informations de position des drônes et de leurs différents capteurs pourront être récupérés depuis le réseau ROS.
 Python 2.7
+- la librairie rospy, pour communiquer depuis python avec le réseau ROS
 
 ###Matériel
 - Deux drônes ErleCopter avec GPS
