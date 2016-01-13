@@ -47,6 +47,7 @@ Python 2.7
 - `set_position` - Donner une consigne de position à un drône
 - `stop_program` - arrêt du programme
 - `fix_altitude` - corriger l’altitude du drône suiveur
+- `fix_direction` - corriger la direction du drône suiveur
 - `fix_distance` - corriger la distance entre les deux drônes
 - `fix_orientation` - corriger l‘orientation du drône suiveur
 - `get_ros_flightinfo` - Récupérer les données de vol sur le réseau ROS

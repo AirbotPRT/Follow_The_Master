@@ -1,11 +1,11 @@
 import abstractros
 
 #Declare the data received from GPS on ROS network
-class Drone():
-	def __init__(id):
+class Drone:
+	def __init__(self,id):
 
-		#Not sure => To modify
-		id="/drone"
+		
+		self.id=id
 
 	#adapter for data from ros
 	def update_data(x,y,z,o):
@@ -52,6 +52,11 @@ class Drone_slave(Drone):
 
 	#Define function to fix the slave orientation when master is moving
 	def fix_orientation():
+
+	#Define function to fix the slave direction when master is moving
+	def fix_direction():
+
+
 
 
 
