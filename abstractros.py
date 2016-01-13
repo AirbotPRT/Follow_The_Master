@@ -1,36 +1,33 @@
 import rospy
-from std_msgs.msg import String
-
-from drone_classes import drone
+from geometry_msgs.msg import PoseWithCovarianceStamped
 
 def get_info(drone):
 
-	def callback(data):
-		x=0
-		y=0
-		z=0
-		o=0
-		drone.update_data(x, y, z, o)
+    def callback(data):
+        print data.pose.pose.position.x
+        x = data.pose.pose.position.x
+        y = data.pose.pose.position.y
+        z = data.pose.pose.position.z
+        o = data.pose.pose.orientation.z
+        drone.update_data(x, y, z, o)
 
+    try:
+        rospy.init_node('flight_info_listener', anonymous=True)
 
-	rospy.init_node(drone.id +'_flight_info_listener',anonymous=True)
+        rospy.Subscriber(drone.id+"/global_position/local", PoseWithCovarianceStamped, callback)
 
-	rospy.Subscriber(drone.id+"/data/imu",String, callback)
+    except rospy.ROSInterruptException:
+       print "oups :("
 
-#	try:
+    rospy.spin()
 
-#	except rospy.ROSInterruptException:
-#  		pass
-
-	rospy.spin()
-
-	def refresh_flight_info(drones):
-		for drone in drones :
-			get_info(drone)
-		
-
-
+def refresh_flight_info(drones):
+    for drone in drones:
+        get_info(drone)
+        
 
 
 
-  	
+
+
+    
