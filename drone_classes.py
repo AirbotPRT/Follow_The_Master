@@ -18,43 +18,42 @@ class Drone:
 
 
 class Drone_slave(Drone):
-	def __init__():
+	def __init__(self):
 
 	#Define function to take off
-	def take_off():
+	def take_off(self):
 
 
 	#Define function to land
-	def land():
+	def land(self):
 
 
 
 	#Define function to set which drone is the master
-	def set_master(drone):
+	def set_master(self,drone):
 
 
 
 
 	#Define function to set the position of the slave, the same as the master
-	def set_position(x,y,z,Orientation):
+	def set_position(self,x,y,z,Orientation):
 
 
 
 	#Define function to fix the slave altitude when master is moving
-	def fix_altitude():
-
+	def fix_altitude(self):
 
 
 	#Define function to fix the slave distance when master is moving
-	def fix_distance():
+	def fix_distance(self):
 
 
 
 	#Define function to fix the slave orientation when master is moving
-	def fix_orientation():
+	def fix_orientation(self):
 
 	#Define function to fix the slave direction when master is moving
-	def fix_direction():
+	def fix_direction(sel)f:
 
 
 
