@@ -20,11 +20,7 @@ def get_info(drone):
        print "oups :("
 
     rospy.spin()
-
-def refresh_flight_info(drones):
-    for drone in drones:
-        get_info(drone)
-        
+       
 
 
 

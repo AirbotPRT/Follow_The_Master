@@ -14,7 +14,10 @@ class Drone:
 		self.z=z
 		self.o=o
 
-
+	@staticmethod
+	def refresh_flight_info(drones):
+  	  for drone in drones:
+   	     get_info(drone)
 
 
 class Drone_slave(Drone):
