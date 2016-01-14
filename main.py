@@ -19,7 +19,7 @@ def init():
 
 #Slave follow the master
 def slave_control():
-	abstractros.refresh_flight_info(master_d,slave_d)  # Don't like that
+	Drone.refresh_flight_info([master_d,slave_d])  # Don't like that
 	check_safety_issues()
 	
 	#
