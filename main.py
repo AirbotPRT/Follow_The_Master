@@ -12,9 +12,9 @@ def init():
 	master_d = Drone('/drone1')
 	slave_d = Drone_slave('/drone2')
 
-	
-	def check_safety_issues():
-		pass
+
+def check_safety_issues():
+	pass
 
 
 #Slave follow the master

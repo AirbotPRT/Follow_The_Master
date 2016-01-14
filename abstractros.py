@@ -9,7 +9,7 @@ def get_info(drone):
         y = data.pose.pose.position.y
         z = data.pose.pose.position.z
         o = data.pose.pose.orientation.z
-        drone.update_data(x, y, z, o)
+        drone.set_position(x, y, z, o)
 
     try:
         rospy.init_node('flight_info_listener', anonymous=True)

@@ -1,14 +1,14 @@
 import abstractros
 
 #Declare the data received from GPS on ROS network
-class Drone:
+class Drone(object):
 	def __init__(self,id):
 
 		
 		self.id=id
 
 	#adapter for data from ros
-	def update_data(self,x,y,z,o):
+	def set_position(self,x,y,z,o):
 		self.x=x
 		self.y=y
 		self.z=z
@@ -20,27 +20,27 @@ class Drone:
    	     get_info(drone)
 
 
+
+
 class Drone_slave(Drone):
 	def __init__(self):
-		pass
+		super(Drone_slave, self).__init__()
+		self.master=None
+
 	#Define function to take off
 	def take_off(self):
-		pass
+		abstractros.takeOff()
 
 	#Define function to land
 	def land(self):
-		pass
+		abstractros.land()
+
 
 
 	#Define function to set which drone is the master
 	def set_master(self,drone):
-		pass
+		self.master=drone
 
-
-
-	#Define function to set the position of the slave, the same as the master
-	def set_position(self,x,y,z,o):
-		pass
 
 
 	#Define function to fix the slave altitude when master is moving
