@@ -3,16 +3,11 @@ import abstractros
 #Declare the data received from GPS on ROS network
 class Drone(object):
 	def __init__(self,id):
-
-		
 		self.id=id
-
-	#adapter for data from ros
-	def set_position(self,x,y,z,o):
-		self.x=x
-		self.y=y
-		self.z=z
-		self.o=o
+		self.x=0
+		self.y=0
+		self.z=0
+		self.o=0
 
 	@staticmethod
 	def refresh_flight_info(drones):
