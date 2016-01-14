@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import rospy
 from geometry_msgs.msg import PoseWithCovarianceStamped
 
@@ -5,9 +7,9 @@ def get_info(drone):
     """
         Get flight info from ROS and insert it in the related drone object.
 
-        It takes the information from ROS located at /{drone_id}/global_position/local,
+        It takes the information from ROS located at /{drone_id}/mavros/global_position/local,
         and select only the valuable data. Then it store it in the drone Object given in argument.
- 
+
         :param drone: The drone from which coordinates will be updated
         :type drone: Drone
         :return: Nothing
@@ -15,6 +17,9 @@ def get_info(drone):
     """
 
     def callback(data):
+        """
+            callback function
+        """
         drone.x = data.pose.pose.position.x
         drone.y = data.pose.pose.position.y
         drone.z = data.pose.pose.position.z
@@ -23,7 +28,7 @@ def get_info(drone):
     try:
         rospy.init_node('flight_info_listener', anonymous=True)
 
-        rospy.Subscriber(drone.id+"/global_position/local", PoseWithCovarianceStamped, callback)
+        rospy.Subscriber(drone.id+"/mavros/global_position/local", PoseWithCovarianceStamped, callback)
 
     except rospy.ROSInterruptException:
        print "oups :("
@@ -85,7 +90,7 @@ def goto(drone, x, y, z, o):
         :param x: target point X coordinate
         :param y: target point Y coordinate
         :param z: target point Z coordinate
-        :param o: target orientation between -1 and 1 (-1 = -180° , 1 = 180°)
+        :param o: target orientation between -1 and 1 (-1 = -180deg , 1 = 180deg)
 
         :type drone: Drone
         :type x: float

@@ -1,58 +1,94 @@
+#!/usr/bin/python
+
 import abstractros
 
-#Declare the data received from GPS on ROS network
 class Drone(object):
-	def __init__(self,id):
-		self.id=id
-		self.x=0
-		self.y=0
-		self.z=0
-		self.o=0
+    '''
+        class Drone that represent a basic simplified drone.
+        it suppose that the drone is under a perfect control loop
+        the attributes only include x,y,z coordinates and the orientation
+        The id correspond to the name given to the drone
+    '''
+    def __init__(self, id):
+        self.id = id
+        self.x = 0
+        self.y = 0
+        self.z = 0
+        self.o = 0
 
-	@staticmethod
-	def refresh_flight_info(drones):
-  	  for drone in drones:
-   	     get_info(drone)
-
-
-
-
-class Drone_slave(Drone):
-	def __init__(self):
-		super(Drone_slave, self).__init__()
-		self.master=None
-
-	#Define function to take off
-	def take_off(self):
-		abstractros.takeOff()
-
-	#Define function to land
-	def land(self):
-		abstractros.land()
+    @staticmethod
+    def refresh_flight_info(drones):
+        '''
+            Static function to refresh the data 
+        '''
+        for drone in drones:
+            abstractros.get_info(drone)
 
 
 
-	#Define function to set which drone is the master
-	def set_master(self,drone):
-		self.master=drone
+
+class DroneSlave(Drone):
+    """
+     class drone slave herited from Drone
+     has the ability to follow a master (defined as attribute)
+    """
+    def __init__(self):
+        super(DroneSlave, self).__init__()
+        self.master = None
+
+    def take_off(self):
+        """
+            function to take off
+        """
+        abstractros.takeoff(self)
+
+    def land(self):
+        """
+            function to land
+        """
+        abstractros.land(self)
 
 
 
-	#Define function to fix the slave altitude when master is moving
-	def fix_altitude(self):
-		pass
+    #Define function to set which drone is the master
+    def set_master(self, drone):
+        """
+            function to set the master
+        """
+        self.master = drone
 
-	#Define function to fix the slave distance when master is moving
-	def fix_distance(self):
-		pass
+
+    #Define function to fix the slave altitude when master is moving
+    def fix_altitude(self):
+        """
+            function to fix altitude difference between master and self
+        """
+        # TODO: code this
+        pass
+
+    #Define function to fix the slave distance when master is moving
+    def fix_distance(self):
+        """
+            function to fix distance between master and self
+        """
+        # TODO: code this
+        pass
 
 
-	#Define function to fix the slave orientation when master is moving
-	def fix_orientation(self):
-		pass
-	#Define function to fix the slave direction when master is moving
-	def fix_direction(self):
-		pass
+    #Define function to fix the slave orientation when master is moving
+    def fix_orientation(self):
+        """
+            function to fix orientation difference between master and self
+        """
+        # TODO: code this
+        pass
+    #Define function to fix the slave direction when master is moving
+    def fix_colinearity(self):
+        """
+            function to fix colinearity between master and self
+        """
+        # TODO: code this
+        pass
 
 
 

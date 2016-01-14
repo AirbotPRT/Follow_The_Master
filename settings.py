@@ -1,4 +1,4 @@
-marginAlt =1
-marginOrien =1
-marginDist=1
-marginDir=1
+MARGIN_ALT = 1
+MARGIN_ORIEN = 1
+MARGIN_DIST = 1
+MARGIN_COL = 1
