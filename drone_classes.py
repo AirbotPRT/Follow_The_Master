@@ -49,6 +49,12 @@ class DroneSlave(Drone):
         abstractros.land(self)
 
 
+    def goto(self, x, y, z, o):
+        """
+            function to go to the (x,y,z,o) point
+        """
+        abstractros.goto(x, y, z, o)
+
 
     #Define function to set which drone is the master
     def set_master(self, drone):
@@ -59,35 +65,44 @@ class DroneSlave(Drone):
 
 
     #Define function to fix the slave altitude when master is moving
-    def fix_altitude(self):
+    def fix_altitude(self, diff):
         """
             function to fix altitude difference between master and self
         """
-        # TODO: code this
-        pass
+        self.goto(self.x, self.y, self.master.z + diff, self.o)
+
 
     #Define function to fix the slave distance when master is moving
-    def fix_distance(self):
+    def fix_distance(self, dist):
         """
             function to fix distance between master and self
         """
-        # TODO: code this
         pass
+        # TODO : ALGO calcul de la position a bonne distance la plus proche
+        # 
+        #
+        #
+        #
+
 
 
     #Define function to fix the slave orientation when master is moving
-    def fix_orientation(self):
+    def fix_orientation(self, diff):
         """
             function to fix orientation difference between master and self
         """
-        # TODO: code this
-        pass
+        self.goto(self.x, self.y, self.z, self.master.o+diff)
+
     #Define function to fix the slave direction when master is moving
     def fix_colinearity(self):
         """
             function to fix colinearity between master and self
         """
-        # TODO: code this
+        # TODO : ALGO calcul de la position a atteindre pour corriger l'angle entre la direction du master et le slave
+        # 
+        #
+        #
+        #
         pass
 
 

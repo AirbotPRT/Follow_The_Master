@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
 import rospy
+import mavros
+from mavros.srv import *
 from geometry_msgs.msg import PoseWithCovarianceStamped
 
 def get_info(drone):
@@ -23,7 +25,7 @@ def get_info(drone):
         drone.x = data.pose.pose.position.x
         drone.y = data.pose.pose.position.y
         drone.z = data.pose.pose.position.z
-        drone.o = data.pose.pose.orientation.z
+        drone.o = data.pose.pose.orientation.z*180 #en deg
 
     try:
         rospy.init_node('flight_info_listener', anonymous=True)
@@ -45,7 +47,13 @@ def arm(drone):
         :return: Nothing
         :rtype: void
     """
-    pass
+    rospy.wait_for_service('arm')
+    try:
+        send_arm_command = rospy.ServiceProxy('arm', Arm)
+        resp = send_arm_command('arg')
+        return resp1
+    except rospy.ServiceException, ex:
+        print "Service call failed: %s"%ex
 
 def disarm(drone):
     """
