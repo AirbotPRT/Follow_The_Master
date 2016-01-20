@@ -2,7 +2,6 @@
 
 import rospy
 import mavros
-from mavros.srv import *
 from geometry_msgs.msg import PoseWithCovarianceStamped
 
 def get_info(drone):
@@ -47,11 +46,13 @@ def arm(drone):
         :return: Nothing
         :rtype: void
     """
-    rospy.wait_for_service('arm')
+    rospy.wait_for_service(drone.id+'/mavros/cmd/arming')
     try:
-        send_arm_command = rospy.ServiceProxy('arm', Arm)
+        print "ready"
+        send_arm_command = rospy.ServiceProxy('arming', Arm)
+        print "oklm"
         resp = send_arm_command('arg')
-        return resp1
+        return resp
     except rospy.ServiceException, ex:
         print "Service call failed: %s"%ex
 

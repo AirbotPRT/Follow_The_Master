@@ -63,8 +63,8 @@ class DroneSlave(Drone):
      class drone slave herited from Drone
      has the ability to follow a master (defined as attribute)
     """
-    def __init__(self):
-        super(DroneSlave, self).__init__()
+    def __init__(self,id):
+        super(DroneSlave, self).__init__(id)
         self.master = None
 
     def take_off(self):

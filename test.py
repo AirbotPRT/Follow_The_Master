@@ -1,24 +1,18 @@
 #!/usr/bin/python
 
 import math
-#from drone_classes import Drone
+import abstractros
+from drone_classes import *
 
 def main():
     """
         test function
     """
-    #drone_master = Drone("/drone1")
-    #Drone.refresh_flight_info([drone_master])
-
-
-    x1 = 1
-    y1 = 0
-    o1 = 45
-
-    x2 = 5
-    y2 = 0
-    o2 = 0
-
+    drone_master = Drone("/test")
+    drone_slave = DroneSlave("/drone1")
+    drone_slave.set_master(drone_master)
+    Drone.refresh_flight_info([drone_slave])
+    abstractros.arm(drone_slave)
 
 
 main()
