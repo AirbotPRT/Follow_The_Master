@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 import rospy
-import mavros
+from mavros_msgs.srv import CommandBool
 from geometry_msgs.msg import PoseWithCovarianceStamped
 
 def get_info(drone):
@@ -17,30 +17,26 @@ def get_info(drone):
         :rtype: void
     """
 
-    def callback(data):
-        """
-            callback function
-        """
+    try:
+        rospy.init_node('flight_info_listener', anonymous=True)
+
+        data = rospy.wait_for_message(drone.id+"/mavros/global_position/local", PoseWithCovarianceStamped)
+
         drone.x = data.pose.pose.position.x
         drone.y = data.pose.pose.position.y
         drone.z = data.pose.pose.position.z
         drone.o = data.pose.pose.orientation.z*180 #en deg
 
-    try:
-        rospy.init_node('flight_info_listener', anonymous=True)
-
-        rospy.Subscriber(drone.id+"/mavros/global_position/local", PoseWithCovarianceStamped, callback)
-
     except rospy.ROSInterruptException:
-       print "oups :("
+        print "oups :("
 
-    rospy.spin()
+
 
 def arm(drone):
     """
         Send a arm command to ROS for the drone send in param.
 
- 
+
         :param drone: The drone that will takeoff
         :type drone: Drone
         :return: Nothing
@@ -48,10 +44,8 @@ def arm(drone):
     """
     rospy.wait_for_service(drone.id+'/mavros/cmd/arming')
     try:
-        print "ready"
-        send_arm_command = rospy.ServiceProxy('arming', Arm)
-        print "oklm"
-        resp = send_arm_command('arg')
+        send_arm_command = rospy.ServiceProxy(drone.id+'/mavros/cmd/arming', CommandBool)
+        resp = send_arm_command(1)
         return resp
     except rospy.ServiceException, ex:
         print "Service call failed: %s"%ex
@@ -59,7 +53,7 @@ def arm(drone):
 def disarm(drone):
     """
         Send a disarm command to ROS for the drone send in param.
- 
+
         :param drone: The drone that will takeoff
         :type drone: Drone
         :return: Nothing
@@ -71,7 +65,7 @@ def disarm(drone):
 def takeoff(drone):
     """
         Send a takeoff command to ROS for the drone send in param.
- 
+
         :param drone: The drone that will takeoff
         :type drone: Drone
         :return: Nothing
@@ -80,10 +74,10 @@ def takeoff(drone):
     pass
 
 def land(drone):
-    
+
     """
         Send a land command to ROS for the drone send in param.
- 
+
         :param drone: The drone that will land
         :type drone: Drone
         :return: Nothing
