@@ -100,7 +100,7 @@ class DroneSlave(Drone):
         """
             function to fix altitude difference between master and self
         """
-        self.goto(self, self.x, self.y, self.master.z + diff, self.o)
+        self.goto(self.x, self.y, self.master.z + diff, self.o)
 
 
     #Define function to fix the slave distance when master is moving
@@ -123,14 +123,14 @@ class DroneSlave(Drone):
         x_target = self.x + (Drone.calc_distance(self.master, self)-dist)*math.cos(diff_angle*2*math.pi/360)
         y_target = self.y + (Drone.calc_distance(self.master, self)-dist)*math.sin(diff_angle*2*math.pi/360)
 
-        self.goto(self, x_target, y_target, self.z, self.o)
+        self.goto(x_target, y_target, self.z, self.o)
 
     #Define function to fix the slave orientation when master is moving
     def fix_orientation(self, diff):
         """
             function to fix orientation difference between master and self
         """
-        self.goto(self, self.x, self.y, self.z, self.master.o+diff)
+        self.goto(self.x, self.y, self.z, self.master.o+diff)
 
     #Define function to fix the slave direction when master is moving
     def fix_colinearity(self, diff):
@@ -143,7 +143,7 @@ class DroneSlave(Drone):
         y_target = self.master.y-Drone.calc_distance(self.master, self)*math.cos((self.master.o+diff)*2*math.pi/360)
 
         # would be better to impose a defined curve, but not possible actually.
-        self.goto(self, x_target, y_target, self.z, self.o)
+        self.goto(x_target, y_target, self.z, self.o)
 
 
 

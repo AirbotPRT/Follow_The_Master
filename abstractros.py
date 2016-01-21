@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 import rospy
-from mavros_msgs.srv import CommandBool
-from geometry_msgs.msg import PoseWithCovarianceStamped
+from mavros_msgs.srv import CommandBool, CommandTOL
+from std_msgs.msg import Header
+from geometry_msgs.msg import PoseStamped, PoseWithCovarianceStamped, Point, Quaternion
+from tf.transformations import quaternion_from_euler
 
 def get_info(drone):
     """
@@ -19,9 +21,9 @@ def get_info(drone):
 
     try:
         rospy.init_node('flight_info_listener', anonymous=True)
-
+        print "waiting"
         data = rospy.wait_for_message(drone.id+"/mavros/global_position/local", PoseWithCovarianceStamped)
-
+        print "youhou !"
         drone.x = data.pose.pose.position.x
         drone.y = data.pose.pose.position.y
         drone.z = data.pose.pose.position.z
@@ -59,7 +61,13 @@ def disarm(drone):
         :return: Nothing
         :rtype: void
     """
-    pass
+    rospy.wait_for_service(drone.id+'/mavros/cmd/arming')
+    try:
+        send_arm_command = rospy.ServiceProxy(drone.id+'/mavros/cmd/arming', CommandBool)
+        resp = send_arm_command(0)
+        return resp
+    except rospy.ServiceException, ex:
+        print "Service call failed: %s"%ex
 
 
 def takeoff(drone):
@@ -71,7 +79,22 @@ def takeoff(drone):
         :return: Nothing
         :rtype: void
     """
-    pass
+    min_pitch = 0.1
+    yaw = drone.o
+    latitude = drone.x
+    longitude = drone.y
+    altitude = drone.z + 2
+
+
+
+    rospy.wait_for_service(drone.id+'/mavros/cmd/takeoff')
+    try:
+        send_takeoff_command = rospy.ServiceProxy(drone.id+'/mavros/cmd/takeoff', CommandTOL)
+        resp = send_takeoff_command(min_pitch, yaw, latitude, longitude, altitude)
+        return resp
+    except rospy.ServiceException, ex:
+        print "Service call failed: %s"%ex
+
 
 def land(drone):
 
@@ -83,9 +106,23 @@ def land(drone):
         :return: Nothing
         :rtype: void
     """
-    pass
+    min_pitch = 0.0
+    yaw = drone.o
+    latitude = drone.x
+    longitude = drone.y
+    altitude = 0
 
-def goto(drone, x, y, z, o):
+
+    rospy.wait_for_service(drone.id+'/mavros/cmd/land')
+    try:
+        send_land_command = rospy.ServiceProxy(drone.id+'/mavros/cmd/land', CommandTOL)
+        resp = send_land_command(min_pitch, yaw, latitude, longitude, altitude)
+        return resp
+    except rospy.ServiceException, ex:
+        print "Service call failed: %s"%ex
+
+
+def goto(drone, posx, posy, posz, poso):
     """
         Send a goto command to ROS for the related drone .
 
@@ -104,4 +141,12 @@ def goto(drone, x, y, z, o):
         :return: Nothing
         :rtype: void
     """
-    pass
+    target_pos = PoseStamped(header=Header(frame_id='mavsetpos', stamp=rospy.get_rostime()))
+    target_pos.pose.position = Point(x=posx, y=posy, z=posz)
+
+    quat = quaternion_from_euler(0, 0, poso/180)
+    target_pos.pose.orientation = Quaternion(*quat)
+
+
+    pub = rospy.Publisher(drone.id+"/mavros/setpoint_position/local", PoseStamped, queue_size=10)
+    pub.publish(target_pos)
