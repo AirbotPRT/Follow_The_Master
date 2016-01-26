@@ -48,10 +48,15 @@ Python 2.7
 - `stop_program` - arrêt du programme
 - `fix_altitude` - corriger l’altitude du drône suiveur
 - `fix_direction` - corriger la direction du drône suiveur
+- `calc_distance` - Calculer la distance entre les deux drones
 - `fix_distance` - corriger la distance entre les deux drônes
 - `fix_orientation` - corriger l‘orientation du drône suiveur
+- `calc_colinearity` - Calcul de correction de la colinéarité
+- `fix_colinearity` - Corriger la colinéarité des drones
 - `get_ros_flightinfo` - Récupérer les données de vol sur le réseau ROS
+- `refresh_flight_info` - Rafraîchir les informations venant de ROS
 - `publish_ros_cmd` - Publier les commandes sur le réseau ROS
+
 
 ##Architecture
 à venir ...
