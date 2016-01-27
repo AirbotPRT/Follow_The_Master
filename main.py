@@ -28,7 +28,7 @@ def slave_control():
     """
         main program loop
     """
-    Drone.refresh_flight_info([master_d, slave_d])  # Don't like that
+    Drone.refresh_flight_info([master_d, slave_d])
     check_safety_issues()
 
     # Altitude fix

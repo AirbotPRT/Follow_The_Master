@@ -16,6 +16,7 @@ Une fois le drône “Maître” prêt, notre application est mise en route, ce 
 - Ajustement de son altitude avec celle du drône “Maître”
 - De même avec la distance
 - De même avec l’orientation
+- Ainsi que de la colinéarité
 
 A partir de ce moment, tout mouvement du drône “Maître” sera reproduit par le drône “Suiveur” suivant les trois variables suivantes. (Altitude, Distance, Orientation).
 
@@ -59,7 +60,7 @@ Python 2.7
 
 
 ##Architecture
-à venir ...
+![Architecture logicielle](ArchitectLogiciel.PNG)
 
 
 
